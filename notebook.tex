@@ -1,0 +1,1598 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{????}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{数据分析期末项目}\label{ux6570ux636eux5206ux6790ux671fux672bux9879ux76ee}
+
+\subsection{项目:
+预测三亚市气温状况}\label{ux9879ux76ee-ux9884ux6d4bux4e09ux4e9aux5e02ux6c14ux6e29ux72b6ux51b5}
+
+\subsection{1.分析数据}\label{ux5206ux6790ux6570ux636e}
+
+在项目的第一个部分，我对data\_weather数据进行初步的观察并给出分析。通过对数据的探索来熟悉数据可以让更好地解释结果。
+
+由于这个项目的最终目标是建立一个预测气温的模型，需要将数据集分为\textbf{特征(features)}和\textbf{目标变量(target
+variable)}。\textbf{特征}
+\texttt{\textquotesingle{}date\textquotesingle{}}，
+\texttt{\textquotesingle{}temp\_h\textquotesingle{}}，\texttt{\textquotesingle{}temp\_l\textquotesingle{}}，\texttt{\textquotesingle{}temp\_diff\textquotesingle{}}，和
+\texttt{\textquotesingle{}weather\textquotesingle{}}，\texttt{\textquotesingle{}wind\_power\textquotesingle{}}，\texttt{\textquotesingle{}wind\_direction\textquotesingle{}}，给我们提供了每个数据点的数量相关的信息。\textbf{目标变量}：\texttt{\textquotesingle{}temp\_avr\textquotesingle{}}，是我们希望预测的变量。他们分别被存在\texttt{features}和\texttt{temp}两个变量名中。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import}  \PY{n}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{graphics}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{import} \PY{n}{qqplot}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.sans\PYZhy{}serif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SimHei}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{axes.unicode\PYZus{}minus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{weather} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weather.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{1.1查看原始数据}\label{ux67e5ux770bux539fux59cbux6570ux636e}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{weather}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    1  三亚  2015/7/1  33  28     多云  西南风  3-4级
+        0  2  三亚  2015/7/2  34  28     多云  西南风  3-4级
+        1  3  三亚  2015/7/3  34  28     多云  西南风  3-4级
+        2  4  三亚  2015/7/4  35  28     多云  西南风  3-4级
+        3  5  三亚  2015/7/5  33  27  雷雨\textasciitilde{}多云  西北风  3-4级
+        4  6  三亚  2015/7/6  33  28  雷雨\textasciitilde{}多云  西北风  3-4级
+\end{Verbatim}
+            
+    \subsubsection{1.2添加列名}\label{ux6dfbux52a0ux5217ux540d}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weather}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wind\PYZus{}direction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wind\PYZus{}power}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df\PYZus{}sanya} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{三亚}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    No city      date  temp\_h  temp\_l weather wind\_direction wind\_power
+        0   2   三亚  2015/7/2      34      28      多云            西南风       3-4级
+        1   3   三亚  2015/7/3      34      28      多云            西南风       3-4级
+        2   4   三亚  2015/7/4      35      28      多云            西南风       3-4级
+        3   5   三亚  2015/7/5      33      27   雷雨\textasciitilde{}多云            西北风       3-4级
+        4   6   三亚  2015/7/6      33      28   雷雨\textasciitilde{}多云            西北风       3-4级
+\end{Verbatim}
+            
+    \subsubsection{1.3统计三亚市2015-2016年出现的天气状况}\label{ux7edfux8ba1ux4e09ux4e9aux5e022015-2016ux5e74ux51faux73b0ux7684ux5929ux6c14ux72b6ux51b5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+        \PY{n}{Counter}\PY{p}{(}\PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weather}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} Counter(\{'多云': 346,
+                 '雷雨\textasciitilde{}多云': 2,
+                 '阵雨\textasciitilde{}多云': 6,
+                 '多云\textasciitilde{}阵雨': 3,
+                 '大到暴雨': 7,
+                 '大到暴雨\textasciitilde{}阵雨': 1,
+                 '多云\textasciitilde{}雷阵雨': 7,
+                 '阵雨': 34,
+                 '中雨\textasciitilde{}阵雨': 1,
+                 '雷阵雨\textasciitilde{}多云': 10,
+                 '雷阵雨': 26,
+                 '大雨\textasciitilde{}阵雨': 1,
+                 '中雨\textasciitilde{}多云': 1,
+                 '大雨\textasciitilde{}雷阵雨': 1,
+                 '大雨\textasciitilde{}大到暴雨': 1,
+                 '大雨': 7,
+                 '小到中雨': 6,
+                 '小到中雨\textasciitilde{}多云': 1,
+                 '阵雨\textasciitilde{}大到暴雨': 1,
+                 '雷阵雨\textasciitilde{}阵雨': 1,
+                 '中到大雨': 4,
+                 '中到大雨\textasciitilde{}阵雨': 1,
+                 '晴\textasciitilde{}多云': 1,
+                 '多云\textasciitilde{}阴': 1,
+                 '阴\textasciitilde{}多云': 1,
+                 '阴': 3,
+                 '多云\textasciitilde{}小雨': 10,
+                 '小雨': 8,
+                 '小雨\textasciitilde{}阴': 1,
+                 '小雨\textasciitilde{}多云': 2,
+                 '晴': 2,
+                 '晴\textasciitilde{}阴': 1,
+                 '雷阵雨\textasciitilde{}小雨': 1,
+                 '雷阵雨转多云': 1,
+                 '多云转阵雨': 2,
+                 '暴雨': 6,
+                 '中雨': 2\})
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{weather\PYZus{}condition} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{346}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阵雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大到暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大到暴雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}雷阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{34}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{26}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨\PYZti{}雷阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨\PYZti{}大到暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小到中雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小到中雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阵雨\PYZti{}大到暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中到大雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中到大雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{晴\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阴\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}小雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{8}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小雨\PYZti{}阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{晴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{晴\PYZti{}阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨\PYZti{}小雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨转多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云转阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+        \PY{n}{label} \PY{o}{=} \PY{n}{weather\PYZus{}condition}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<Figure size 1440x1440 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{values} \PY{o}{=} \PY{n}{weather\PYZus{}condition}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{values}\PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{label}\PY{p}{,}\PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{三亚市天气情况饼状图}\label{ux4e09ux4e9aux5e02ux5929ux6c14ux60c5ux51b5ux997cux72b6ux56fe}
+
+    \subsubsection{1.4三亚市气温变化情况}\label{ux4e09ux4e9aux5e02ux6c14ux6e29ux53d8ux5316ux60c5ux51b5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{x} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{y2} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{y3} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}
+                     \PY{n}{x}\PY{p}{,} \PY{n}{y2}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                     \PY{n}{x}\PY{p}{,}\PY{n}{y3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{high}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{low}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temprature/℃}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{510}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{n}{rotation} \PY{o}{=} \PY{l+m+mi}{45}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{2015年7月-2016年11月三亚市气温(High、Low)变化折线图}\label{ux5e747ux6708-2016ux5e7411ux6708ux4e09ux4e9aux5e02ux6c14ux6e29highlowux53d8ux5316ux6298ux7ebfux56fe}
+
+    \subsection{2.基础统计运算}\label{ux57faux7840ux7edfux8ba1ux8fd0ux7b97}
+
+\subsubsection{2.1计算有关三亚市平均气温的描述统计数据。}\label{ux8ba1ux7b97ux6709ux5173ux4e09ux4e9aux5e02ux5e73ux5747ux6c14ux6e29ux7684ux63cfux8ff0ux7edfux8ba1ux6570ux636e}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}用平均气温代表一天天气}
+         \PY{n}{temp}\PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+         
+         \PY{c+c1}{\PYZsh{}目标：计算天气的最小值}
+         \PY{n}{minimum\PYZus{}temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}目标：计算天气的最大值}
+         \PY{n}{maximum\PYZus{}temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}目标：计算天气的平均值}
+         \PY{n}{mean\PYZus{}temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}目标：计算天气的中值}
+         \PY{n}{median\PYZus{}temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}目标：计算天气的标准差}
+         \PY{n}{std\PYZus{}temp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{}目标：输出计算的结果}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Statistics for data\PYZus{}weather dataset:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Minimum temperature: }\PY{l+s+si}{\PYZob{}:,.2f\PYZcb{}}\PY{l+s+s2}{℃}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{minimum\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Maximum temperature: }\PY{l+s+si}{\PYZob{}:,.2f\PYZcb{}}\PY{l+s+s2}{℃}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{maximum\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean temperature: }\PY{l+s+si}{\PYZob{}:,.2f\PYZcb{}}\PY{l+s+s2}{℃}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{mean\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Median temperature }\PY{l+s+si}{\PYZob{}:,.2f\PYZcb{}}\PY{l+s+s2}{℃}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{median\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Standard deviation of temperature: }\PY{l+s+si}{\PYZob{}:,.2f\PYZcb{}}\PY{l+s+s2}{℃}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{std\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Statistics for data\_weather dataset:
+
+Minimum temperature: 12.50℃
+Maximum temperature: 32.00℃
+Mean temperature: 27.64℃
+Median temperature 28.50℃
+Standard deviation of temperature: 2.84℃
+
+    \end{Verbatim}
+
+    \subsubsection{2.2三亚市风力情况}\label{ux4e09ux4e9aux5e02ux98ceux529bux60c5ux51b5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{alist} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wind\PYZus{}power}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{k}{if} \PY{n}{item} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{alist}\PY{p}{:}
+                 \PY{n}{alist}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{alist}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['3-4级', '1级', '2级', '3级', '微风', '4级']
+
+    \end{Verbatim}
+
+    \subsection{3.建模}\label{ux5efaux6a21}
+
+利用基本的skit-learn进行建模
+
+    \subsubsection{3.1定义衡量标准}\label{ux5b9aux4e49ux8861ux91cfux6807ux51c6}
+
+如果不能对模型的训练和测试的表现进行量化地评估，我们就很难衡量模型的好坏。通常我们会定义一些衡量标准，这些标准可以通过对某些误差或者拟合程度的计算来得到。通过运算\href{http://stattrek.com/statistics/dictionary.aspx?definition=coefficient_of_determination}{\emph{决定系数}}R2
+来量化模型的表现。模型的决定系数是回归分析中十分常用的统计信息，经常被当作衡量模型预测能力好坏的标准。
+
+R2的数值范围从0至1，表示\textbf{目标变量}的预测值和实际值之间的相关程度平方的百分比。一个模型的R2
+值为0说明它完全无法预测目标变量；而一个R2
+值为1的模型则可以对目标变量进行完美的预测。从0至1之间的数值，则表示该模型中目标变量中有百分之多少能够用\textbf{特征}来解释。\_模型也可能出现负值的R2，这种情况下模型所做预测还不如直接计算目标变量的平均值。
+
+下方代码的 \texttt{performance\_metric} 函数中，实现了： - 使用
+\texttt{sklearn.metrics} 中的 \texttt{r2\_score} 来计算 \texttt{y\_true}
+和 \texttt{y\_predict}的R2值，作为对其表现的评判。 -
+将评分储存到\texttt{score}变量中。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k}{def} \PY{n+nf}{performance\PYZus{}metric}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}predict}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Calculates and returns the performance score between }
+         \PY{l+s+sd}{        true and predicted values based on the metric chosen. \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{r2\PYZus{}score}
+             
+             
+             \PY{c+c1}{\PYZsh{} TODO: Calculate the performance score between \PYZsq{}y\PYZus{}true\PYZsq{} and \PYZsq{}y\PYZus{}predict\PYZsq{}}
+             \PY{n}{score} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,}\PY{n}{y\PYZus{}predict}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Return the score}
+             \PY{k}{return} \PY{n}{score}
+\end{Verbatim}
+
+
+    \subsubsection{3.2添加新特征}\label{ux6dfbux52a0ux65b0ux7279ux5f81}
+
+    \paragraph{3.2.1查看现有数据}\label{ux67e5ux770bux73b0ux6709ux6570ux636e}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}    No city      date  temp\_h  temp\_l weather wind\_direction wind\_power
+         0   2   三亚  2015/7/2      34      28      多云            西南风       3-4级
+         1   3   三亚  2015/7/3      34      28      多云            西南风       3-4级
+         2   4   三亚  2015/7/4      35      28      多云            西南风       3-4级
+         3   5   三亚  2015/7/5      33      27   雷雨\textasciitilde{}多云            西北风       3-4级
+         4   6   三亚  2015/7/6      33      28   雷雨\textasciitilde{}多云            西北风       3-4级
+\end{Verbatim}
+            
+    \paragraph{3.2.2添加新数据}\label{ux6dfbux52a0ux65b0ux6570ux636e}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{temp\PYZus{}diff} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{temp\PYZus{}avr} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+         \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{temp\PYZus{}diff}\PY{p}{)}
+         \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{temp\PYZus{}avr}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{3.2.3设定features和labels}\label{ux8bbeux5b9afeaturesux548clabels}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{feature} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feature} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{temp} \PY{o}{=} \PY{n}{df\PYZus{}sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsubsection{3.3数据分割与重排}\label{ux6570ux636eux5206ux5272ux4e0eux91cdux6392}
+
+把三亚市天气数据集分成训练和测试两个子集 在下面的代码中： - 使用
+\texttt{sklearn.cross\_validation} 中的 \texttt{train\_test\_split}，
+将\texttt{features}和\texttt{prices}的数据都分成用于训练的数据子集和用于测试的数据子集。
+- 分割比例为：80\%的数据用于训练，20\%用于测试； - 选定一个数值以设定
+\texttt{train\_test\_split} 中的 \texttt{random\_state}
+，这会确保结果的一致性； -
+最终分离出的子集为\texttt{X\_train},\texttt{X\_test},\texttt{y\_train},和\texttt{y\_test}。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{c+c1}{\PYZsh{} TODO: Shuffle and split the data into training and testing subsets}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{temp}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Success}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training and testing split was successful.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training and testing split was successful.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}cross\_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model\_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+
+    \end{Verbatim}
+
+    \subsection{4.分析模型的表现}\label{ux5206ux6790ux6a21ux578bux7684ux8868ux73b0}
+
+    \subsubsection{4.1学习曲线}\label{ux5b66ux4e60ux66f2ux7ebf}
+
+下方区域内的代码会输出四幅图像，它们是一个决策树模型在不同最大深度下的表现。每一条曲线都直观的显示了随着训练数据量的增加，模型学习曲线的训练评分和测试评分的变化。曲线的阴影区域代表的是该曲线的不确定性（用标准差衡量）。这个模型的训练和测试部分都使用决定系数R2来评分。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{import} \PY{n+nn}{visuals} \PY{k}{as} \PY{n+nn}{vs} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} Produce learning curves for varying training set sizes and maximum depths}
+         \PY{n}{vs}\PY{o}{.}\PY{n}{ModelLearning}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{temp}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-33-bbcba45ebb28> in <module>()
+          1 \# Produce learning curves for varying training set sizes and maximum depths
+    ----> 2 vs.ModelLearning(feature, temp);
+    
+
+        \textasciitilde{}\textbackslash{}Desktop\textbackslash{}weather\textbackslash{}visuals.py in ModelLearning(X, y)
+         33         \# Calculate the training and testing scores
+         34         sizes, train\_scores, test\_scores = curves.learning\_curve(regressor, X, y, \textbackslash{}
+    ---> 35             cv = cv, train\_sizes = train\_sizes, scoring = 'r2')
+         36 
+         37         \# Find the mean and standard deviation for smoothing
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}learning\_curve.py in learning\_curve(estimator, X, y, train\_sizes, cv, scoring, exploit\_incremental\_learning, n\_jobs, pre\_dispatch, verbose, error\_score)
+        169             verbose, parameters=None, fit\_params=None, return\_train\_score=True,
+        170             error\_score=error\_score)
+    --> 171             for train, test in cv for n\_train\_samples in train\_sizes\_abs)
+        172         out = np.array(out)[:, :2]
+        173         n\_cv\_folds = out.shape[0] // n\_unique\_ticks
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in \_\_call\_\_(self, iterable)
+        777             \# was dispatched. In particular this covers the edge
+        778             \# case of Parallel used with an exhausted iterator.
+    --> 779             while self.dispatch\_one\_batch(iterator):
+        780                 self.\_iterating = True
+        781             else:
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in dispatch\_one\_batch(self, iterator)
+        623                 return False
+        624             else:
+    --> 625                 self.\_dispatch(tasks)
+        626                 return True
+        627 
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in \_dispatch(self, batch)
+        586         dispatch\_timestamp = time.time()
+        587         cb = BatchCompletionCallBack(dispatch\_timestamp, len(batch), self)
+    --> 588         job = self.\_backend.apply\_async(batch, callback=cb)
+        589         self.\_jobs.append(job)
+        590 
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}\_parallel\_backends.py in apply\_async(self, func, callback)
+        109     def apply\_async(self, func, callback=None):
+        110         """Schedule a func to be run"""
+    --> 111         result = ImmediateResult(func)
+        112         if callback:
+        113             callback(result)
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}\_parallel\_backends.py in \_\_init\_\_(self, batch)
+        330         \# Don't delay the application, to avoid keeping the input
+        331         \# arguments in memory
+    --> 332         self.results = batch()
+        333 
+        334     def get(self):
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in \_\_call\_\_(self)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        132 
+        133     def \_\_len\_\_(self):
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}externals\textbackslash{}joblib\textbackslash{}parallel.py in <listcomp>(.0)
+        129 
+        130     def \_\_call\_\_(self):
+    --> 131         return [func(*args, **kwargs) for func, args, kwargs in self.items]
+        132 
+        133     def \_\_len\_\_(self):
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}cross\_validation.py in \_fit\_and\_score(estimator, X, y, scorer, train, test, verbose, parameters, fit\_params, return\_train\_score, return\_parameters, error\_score)
+       1673             estimator.fit(X\_train, **fit\_params)
+       1674         else:
+    -> 1675             estimator.fit(X\_train, y\_train, **fit\_params)
+       1676 
+       1677     except Exception as e:
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}tree\textbackslash{}tree.py in fit(self, X, y, sample\_weight, check\_input, X\_idx\_sorted)
+       1122             sample\_weight=sample\_weight,
+       1123             check\_input=check\_input,
+    -> 1124             X\_idx\_sorted=X\_idx\_sorted)
+       1125         return self
+       1126 
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}tree\textbackslash{}tree.py in fit(self, X, y, sample\_weight, check\_input, X\_idx\_sorted)
+        114         random\_state = check\_random\_state(self.random\_state)
+        115         if check\_input:
+    --> 116             X = check\_array(X, dtype=DTYPE, accept\_sparse="csc")
+        117             y = check\_array(y, ensure\_2d=False, dtype=None)
+        118             if issparse(X):
+    
+
+        D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}validation.py in check\_array(array, accept\_sparse, dtype, order, copy, force\_all\_finite, ensure\_2d, allow\_nd, ensure\_min\_samples, ensure\_min\_features, warn\_on\_dtype, estimator)
+        431                                       force\_all\_finite)
+        432     else:
+    --> 433         array = np.array(array, dtype=dtype, order=order, copy=copy)
+        434 
+        435         if ensure\_2d:
+    
+
+        ValueError: could not convert string to float: '3-4级'
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<Figure size 720x504 with 0 Axes>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{df\PYZus{}sanya}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:}    No city      date  temp\_diff  temp\_avr  temp\_h  temp\_l weather  \textbackslash{}
+         0   2   三亚  2015/7/2          6      31.0      34      28      多云   
+         1   3   三亚  2015/7/3          6      31.0      34      28      多云   
+         2   4   三亚  2015/7/4          7      31.5      35      28      多云   
+         3   5   三亚  2015/7/5          6      30.0      33      27   雷雨\textasciitilde{}多云   
+         4   6   三亚  2015/7/6          5      30.5      33      28   雷雨\textasciitilde{}多云   
+         
+           wind\_direction wind\_power  
+         0            西南风       3-4级  
+         1            西南风       3-4级  
+         2            西南风       3-4级  
+         3            西北风       3-4级  
+         4            西北风       3-4级  
+\end{Verbatim}
+            
+    \subsubsection{4.2将wind\_power 进行 数字量化
+并保存为sanya.xls}\label{ux5c06wind_power-ux8fdbux884c-ux6570ux5b57ux91cfux5316-ux5e76ux4fddux5b58ux4e3asanya.xls}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{sanya} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sanya.xls}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sanya}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}   city      date  temp\_h  temp\_l weather wind\_direction  wind\_power
+         0   三亚  2015/7/2      34      28      多云            西南风         3.5
+         1   三亚  2015/7/3      34      28      多云            西南风         3.5
+         2   三亚  2015/7/4      35      28      多云            西南风         3.5
+         3   三亚  2015/7/5      33      27   雷雨\textasciitilde{}多云            西北风         3.5
+         4   三亚  2015/7/6      33      28   雷雨\textasciitilde{}多云            西北风         3.5
+\end{Verbatim}
+            
+    \subsubsection{4.3量化文字描述}\label{ux91cfux5316ux6587ux5b57ux63cfux8ff0}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{sanya}  \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{sanya}  \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{sanya} \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阵雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大到暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大到暴雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}雷阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨\PYZti{}雷阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨\PYZti{}大到暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{大雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小到中雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小到中雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{18}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阵雨\PYZti{}大到暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中到大雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{21}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中到大雨\PYZti{}阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{晴\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{23}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阴\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{26}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云\PYZti{}小雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{27}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小雨\PYZti{}阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{小雨\PYZti{}多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{晴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{晴\PYZti{}阴}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨\PYZti{}小雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{33}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{雷阵雨转多云}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{34}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{多云转阵雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{暴雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{36}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{中雨}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{37}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{sanya}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wind\PYZus{}direction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{k}{if} \PY{n}{each} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{:}
+                 \PY{n+nb}{list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{each}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['西南风', '西北风', '东北风', '东南风', '南风', '东风', '西风', '北风']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{sanya} \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{东风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{西风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{南风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{北风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{东北风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{东南风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{西北风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}
+         \PY{n}{sanya} \PY{o}{=}\PY{n}{sanya}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{西南风}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{temp\PYZus{}diff} \PY{o}{=} \PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{temp\PYZus{}avr} \PY{o}{=} \PY{p}{(}\PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}l}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{sanya}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{temp\PYZus{}diff}\PY{p}{)}
+         \PY{n}{sanya}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{temp\PYZus{}avr}\PY{p}{)}
+         
+         \PY{n}{sanya}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:}        date  temp\_h  temp\_l  temp\_diff  temp\_avr  weather  wind\_direction  \textbackslash{}
+         0  2015/7/2      34      28          6      31.0        1               8   
+         1  2015/7/3      34      28          6      31.0        1               8   
+         2  2015/7/4      35      28          7      31.5        1               8   
+         3  2015/7/5      33      27          6      30.0        2               7   
+         4  2015/7/6      33      28          5      30.5        2               7   
+         
+            wind\_power  
+         0         3.5  
+         1         3.5  
+         2         3.5  
+         3         3.5  
+         4         3.5  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{feature} \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{feature} \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{temp} \PY{o}{=}\PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{vs}\PY{o}{.}\PY{n}{ModelLearning}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{temp}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{4.4复杂度曲线}\label{ux590dux6742ux5ea6ux66f2ux7ebf}
+
+下列代码内的区域会输出一幅图像，它展示了一个已经经过训练和验证的决策树模型在不同最大深度条件下的表现。这个图形将包含两条曲线，一个是训练的变化，一个是测试的变化。跟\textbf{学习曲线}相似，阴影区域代表该曲线的不确定性，模型训练和测试部分的评分都用的
+\texttt{performance\_metric} 函数。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{c+c1}{\PYZsh{} TODO: Shuffle and split the data into training and testing subsets}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=}\PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{temp}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Success}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training and testing split was successful.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training and testing split was successful.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{vs}\PY{o}{.}\PY{n}{ModelComplexity}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{5评价模型表现}\label{ux8bc4ux4ef7ux6a21ux578bux8868ux73b0}
+
+这个项目的最后，建立决策树模型，利用最优化的\texttt{fit\_model}函数，基于天气的特征来预测三亚市温度。
+
+    \subsubsection{5.1网格搜索}\label{ux7f51ux683cux641cux7d22}
+
+\textbf{网格搜索法算法就是通过交叉验证的方法去寻找最优的模型参数。
+网格搜索法是指定参数值的一种穷举搜索方法，通过将估计函数的参数通过交叉验证的方法进行优化来得到最优的学习算法。}
+
+    \subsubsection{5.2交叉验证}\label{ux4ea4ux53c9ux9a8cux8bc1}
+
+\textbf{交叉验证(Cross-validation)主要用于建模应用中，例如PCR 、PLS
+回归建模中。在给定的建模样本中，拿出大部分样本进行建模型，留小部分样本用刚建立的模型进行预报，并求这小部分样本的预报误差，记录它们的平方加和。}
+
+\textbf{好处是可以从有限的数据中获得尽可能多的有效信息，从而可以从多个角度去学习样本，避免陷入局部的极值。在这个过程中，无论是训练样本还是测试样本都得到了尽可能多的学习。
+}
+
+    \subsubsection{5.3训练模型}\label{ux8badux7ec3ux6a21ux578b}
+
+使用\textbf{决策树演算法}训练一个模型。为了保证得出的是一个最优模型，我们使用网格搜索法训练模型，以找到最佳的
+\texttt{\textquotesingle{}max\_depth\textquotesingle{}} 参数。 在下方
+\texttt{fit\_model} 函数中，实现了： - 使用 \texttt{sklearn.tree} 中的
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html}{\texttt{DecisionTreeRegressor}}
+创建一个决策树的回归函数； - 并将这个回归函数储存到
+\texttt{\textquotesingle{}regressor\textquotesingle{}} 变量中； - 为
+\texttt{\textquotesingle{}max\_depth\textquotesingle{}}
+创造一个字典，它的值是从1至10的数组，并储存到
+\texttt{\textquotesingle{}params\textquotesingle{}} 变量中； - 使用
+\texttt{sklearn.metrics} 中的
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html}{\texttt{make\_scorer}}
+创建一个评分函数； - 将 \texttt{performance\_metric}
+作为参数传至这个函数中； - 将评分函数储存到
+\texttt{\textquotesingle{}scoring\_fnc\textquotesingle{}} 变量中； -
+使用 \texttt{sklearn.grid\_search} 中的
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html}{\texttt{GridSearchCV}}
+创建一个网格搜索对象； -
+将变量\texttt{\textquotesingle{}regressor\textquotesingle{}},
+\texttt{\textquotesingle{}params\textquotesingle{}},
+\texttt{\textquotesingle{}scoring\_fnc\textquotesingle{}}, 和
+\texttt{\textquotesingle{}cv\_sets\textquotesingle{}}
+作为参数传至这个对象中； - 将 \texttt{GridSearchCV} 存到
+\texttt{\textquotesingle{}grid\textquotesingle{}} 变量中。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{k}{def} \PY{n+nf}{fit\PYZus{}model}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Performs grid search over the \PYZsq{}max\PYZus{}depth\PYZsq{} parameter for a }
+         \PY{l+s+sd}{        decision tree regressor trained on the input data [X, y]. \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} Create cross\PYZhy{}validation sets from the training data}
+             \PY{n}{cv\PYZus{}sets} \PY{o}{=} \PY{n}{ShuffleSplit}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{n\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.20}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} TODO: Create a decision tree regressor }
+             \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{tree}
+             \PY{n}{regressor} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} TODO: Create a dictionary for the parameter \PYZsq{}max\PYZus{}depth\PYZsq{} with a range from 1 to 10}
+             \PY{n}{params} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+             \PY{c+c1}{\PYZsh{} TODO: Transform \PYZsq{}performance\PYZus{}metric\PYZsq{} into a scoring function using \PYZsq{}make\PYZus{}scorer\PYZsq{} }
+             \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+             \PY{n}{scoring\PYZus{}fnc} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{performance\PYZus{}metric}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} TODO: Create the grid search object}
+             \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{grid\PYZus{}search}
+             \PY{n}{grid} \PY{o}{=} \PY{n}{grid\PYZus{}search}\PY{o}{.}\PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{estimator} \PY{o}{=} \PY{n}{regressor}\PY{p}{,} \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{n}{params}\PY{p}{,} \PY{n}{scoring} \PY{o}{=} \PY{n}{scoring\PYZus{}fnc}\PY{p}{,} \PY{n}{cv} \PY{o}{=} \PY{n}{cv\PYZus{}sets}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Fit the grid search object to the data to compute the optimal model}
+             \PY{n}{grid} \PY{o}{=} \PY{n}{grid}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Return the optimal model after fitting the data}
+             \PY{k}{return} \PY{n}{grid}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+\end{Verbatim}
+
+
+    \subsubsection{5.4最优模型}\label{ux6700ux4f18ux6a21ux578b}
+
+决策树回归函数代入训练数据的集合，以得到最优化的模型。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} Fit the training data to the model using grid search}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{ShuffleSplit}
+         \PY{n}{reg} \PY{o}{=} \PY{n}{fit\PYZus{}model}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Produce the value for \PYZsq{}max\PYZus{}depth\PYZsq{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{参数 }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{max\PYZus{}depth}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{最适合模型.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{reg}\PY{o}{.}\PY{n}{get\PYZus{}params}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+参数 'max\_depth' = 8最适合模型.
+
+    \end{Verbatim}
+
+    \subsection{5.5反思}\label{ux53cdux601d}
+
+\href{https://www.cnblogs.com/pinard/p/6160412.html?tdsourcetag=s_pctim_aiomsg}{\texttt{随机森林调参小结}}
+
+    \#\# 6.时间序列分析
+
+    \begin{itemize}
+\tightlist
+\item
+  时间序列与时间序列分析：
+\end{itemize}
+
+在生产和科学研究中，对某一个或者一组变量 x(t)x(t)
+进行观察测量，将在一系列时刻 t1,t2,⋯,tnt1,t2,⋯,tn
+所得到的离散数字组成的序列集合，称之为时间序列。
+
+时间序列分析是根据系统观察得到的时间序列数据，通过曲线拟合和参数估计来建立数学模型的理论和方法。
+
+    \subsubsection{6.1将时间序列转变为索引}\label{ux5c06ux65f6ux95f4ux5e8fux5217ux8f6cux53d8ux4e3aux7d22ux5f15}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{sanya}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{sanya}  \PY{o}{=} \PY{n}{sanya}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{rng} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{date\PYZus{}range}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2015/7/2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016/11/22}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sanya}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{rng}
+         \PY{n}{sanya}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:}             temp\_h  temp\_l  temp\_diff  temp\_avr  weather  wind\_direction  \textbackslash{}
+         2015-07-02      34      28          6      31.0        1               8   
+         2015-07-03      34      28          6      31.0        1               8   
+         2015-07-04      35      28          7      31.5        1               8   
+         2015-07-05      33      27          6      30.0        2               7   
+         2015-07-06      33      28          5      30.5        2               7   
+         2015-07-07      34      28          6      31.0        1               5   
+         2015-07-08      32      27          5      29.5        1               5   
+         2015-07-09      32      27          5      29.5        1               5   
+         2015-07-10      33      26          7      29.5        1               5   
+         2015-07-11      32      26          6      29.0        1               6   
+         2015-07-12      32      27          5      29.5        1               5   
+         2015-07-13      32      27          5      29.5        3               6   
+         2015-07-14      32      27          5      29.5        1               8   
+         2015-07-15      33      28          5      30.5        1               6   
+         2015-07-16      33      28          5      30.5        1               8   
+         2015-07-17      32      27          5      29.5        4               8   
+         2015-07-18      31      26          5      28.5        5               8   
+         2015-07-19      29      26          3      27.5        5               8   
+         2015-07-20      29      26          3      27.5        6               8   
+         2015-07-21      31      27          4      29.0        1               3   
+         2015-07-22      32      27          5      29.5        1               6   
+         2015-07-23      32      27          5      29.5        1               6   
+         2015-07-24      33      28          5      30.5        1               8   
+         2015-07-25      31      27          4      29.0        7               8   
+         2015-07-26      30      26          4      28.0        8               8   
+         2015-07-27      29      24          5      26.5        8               6   
+         2015-07-28      26      24          2      25.0        5               8   
+         2015-07-29      28      25          3      26.5        5               8   
+         2015-07-30      27      24          3      25.5        9               8   
+         2015-07-31      27      24          3      25.5        8               8   
+         {\ldots}            {\ldots}     {\ldots}        {\ldots}       {\ldots}      {\ldots}             {\ldots}   
+         2016-10-24      30      25          5      27.5        1               1   
+         2016-10-25      30      23          7      26.5        1               4   
+         2016-10-26      30      23          7      26.5        1               5   
+         2016-10-27      30      23          7      26.5        1               1   
+         2016-10-28      31      23          8      27.0        1               1   
+         2016-10-29      31      25          6      28.0        1               1   
+         2016-10-30      31      24          7      27.5        1               1   
+         2016-10-31      31      24          7      27.5        1               1   
+         2016-11-01      29      23          6      26.0        1               1   
+         2016-11-02      28      21          7      24.5        1               1   
+         2016-11-03      31      23          8      27.0        1               5   
+         2016-11-04      31      24          7      27.5        1               5   
+         2016-11-05      31      25          6      28.0        1               1   
+         2016-11-06      32      25          7      28.5        1               5   
+         2016-11-07      32      25          7      28.5        1               5   
+         2016-11-08      32      25          7      28.5        1               1   
+         2016-11-09      30      24          6      27.0        1               1   
+         2016-11-10      30      24          6      27.0        8               1   
+         2016-11-11      31      25          6      28.0        1               5   
+         2016-11-12      31      24          7      27.5        1               5   
+         2016-11-13      31      25          6      28.0        8               5   
+         2016-11-14      29      25          4      27.0       16               1   
+         2016-11-15      30      21          9      25.5       17               1   
+         2016-11-16      26      22          4      24.0        8               5   
+         2016-11-17      28      24          4      26.0        8               1   
+         2016-11-18      28      22          6      25.0        1               4   
+         2016-11-19      30      22          8      26.0        1               6   
+         2016-11-20      30      23          7      26.5        1               5   
+         2016-11-21      30      21          9      25.5        1               5   
+         2016-11-22      25      21          4      23.0        1               4   
+         
+                     wind\_power  
+         2015-07-02         3.5  
+         2015-07-03         3.5  
+         2015-07-04         3.5  
+         2015-07-05         3.5  
+         2015-07-06         3.5  
+         2015-07-07         3.5  
+         2015-07-08         3.5  
+         2015-07-09         3.5  
+         2015-07-10         3.5  
+         2015-07-11         3.5  
+         2015-07-12         3.5  
+         2015-07-13         3.5  
+         2015-07-14         3.5  
+         2015-07-15         3.5  
+         2015-07-16         3.5  
+         2015-07-17         3.5  
+         2015-07-18         3.5  
+         2015-07-19         3.5  
+         2015-07-20         3.5  
+         2015-07-21         3.5  
+         2015-07-22         3.5  
+         2015-07-23         3.5  
+         2015-07-24         3.5  
+         2015-07-25         3.5  
+         2015-07-26         3.5  
+         2015-07-27         3.5  
+         2015-07-28         3.5  
+         2015-07-29         3.5  
+         2015-07-30         3.5  
+         2015-07-31         3.5  
+         {\ldots}                {\ldots}  
+         2016-10-24         2.0  
+         2016-10-25         1.0  
+         2016-10-26         2.0  
+         2016-10-27         1.0  
+         2016-10-28         1.0  
+         2016-10-29         2.0  
+         2016-10-30         2.0  
+         2016-10-31         2.0  
+         2016-11-01         2.0  
+         2016-11-02         3.0  
+         2016-11-03         3.0  
+         2016-11-04         1.0  
+         2016-11-05         2.0  
+         2016-11-06         1.0  
+         2016-11-07         1.0  
+         2016-11-08         2.0  
+         2016-11-09         3.0  
+         2016-11-10         1.0  
+         2016-11-11         1.0  
+         2016-11-12         1.0  
+         2016-11-13         1.0  
+         2016-11-14         1.0  
+         2016-11-15         1.0  
+         2016-11-16         2.0  
+         2016-11-17         1.0  
+         2016-11-18         1.0  
+         2016-11-19         1.0  
+         2016-11-20         2.0  
+         2016-11-21         1.0  
+         2016-11-22         1.0  
+         
+         [510 rows x 7 columns]
+\end{Verbatim}
+            
+    \subsubsection{6.2平均气温的重采样}\label{ux5e73ux5747ux6c14ux6e29ux7684ux91cdux91c7ux6837}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{}按照周}
+         \PY{n}{weather\PYZus{}week} \PY{o}{=} \PY{n}{sanya}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp\PYZus{}avr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{weather\PYZus{}week}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} 2015-07-05    30.875000
+         2015-07-12    29.785714
+         2015-07-19    29.357143
+         2015-07-26    29.000000
+         2015-08-02    26.428571
+         2015-08-09    29.000000
+         2015-08-16    30.214286
+         2015-08-23    30.714286
+         2015-08-30    29.571429
+         2015-09-06    29.000000
+         Freq: W-SUN, Name: temp\_avr, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{}查看当前数据}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{weather\PYZus{}week}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The avrange temperature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{despine}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{6.3时间序列的差分d}\label{ux65f6ux95f4ux5e8fux5217ux7684ux5deeux5206d}
+
+\subparagraph{ARIMA
+模型对时间序列的要求是平稳型。因此，当得到一个非平稳的时间序列时，首先要做的即是做时间序列的差分，直到得到一个平稳时间序列。如果对时间序列做d次差分才能得到一个平稳序列，那么可以使用ARIMA(p,d,q)模型，其中d是差分次数。}\label{arima-ux6a21ux578bux5bf9ux65f6ux95f4ux5e8fux5217ux7684ux8981ux6c42ux662fux5e73ux7a33ux578bux56e0ux6b64ux5f53ux5f97ux5230ux4e00ux4e2aux975eux5e73ux7a33ux7684ux65f6ux95f4ux5e8fux5217ux65f6ux9996ux5148ux8981ux505aux7684ux5373ux662fux505aux65f6ux95f4ux5e8fux5217ux7684ux5deeux5206ux76f4ux5230ux5f97ux5230ux4e00ux4e2aux5e73ux7a33ux65f6ux95f4ux5e8fux5217ux5982ux679cux5bf9ux65f6ux95f4ux5e8fux5217ux505adux6b21ux5deeux5206ux624dux80fdux5f97ux5230ux4e00ux4e2aux5e73ux7a33ux5e8fux5217ux90a3ux4e48ux53efux4ee5ux4f7fux7528arimapdqux6a21ux578bux5176ux4e2ddux662fux5deeux5206ux6b21ux6570}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{diff1} \PY{o}{=} \PY{n}{weather\PYZus{}week}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{diff1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1aa22929278>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    一阶差分的时间序列的均值和方差已经基本平稳，不过我们还是可以比较一下二阶差分的效果
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{diff2} \PY{o}{=} \PY{n}{weather\PYZus{}week}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{diff2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1aa229349b0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_74_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    可以看出二阶差分后的时间序列与一阶差分相差不大，并且二者随着时间推移，时间序列的均值和方差保持不变。因此可以将差分次数d设置为1。
+
+    \subsection{7.选择合适的p,q}\label{ux9009ux62e9ux5408ux9002ux7684pq}
+
+\subsubsection{7.1第一步要先查看时间序列的ACF自相关图和PACF偏自相关图}\label{ux7b2cux4e00ux6b65ux8981ux5148ux67e5ux770bux65f6ux95f4ux5e8fux5217ux7684acfux81eaux76f8ux5173ux56feux548cpacfux504fux81eaux76f8ux5173ux56fe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{=}\PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}acf}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+         \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{212}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}pacf}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_77_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{k}{def} \PY{n+nf}{tsplot}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{lags} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{n}{figsize}\PY{p}{)}
+             \PY{n}{layout} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{ts\PYZus{}ax} \PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{n}{layout}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{n}{hist\PYZus{}ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{n}{layout}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{acf\PYZus{}ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{n}{layout}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{n}{pacf\PYZus{}ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot2grid}\PY{p}{(}\PY{n}{layout}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{y}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ts\PYZus{}ax}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} ts\PYZus{}ax.set\PYZus{}titile(title)}
+            \PY{c+c1}{\PYZsh{} hist\PYZus{}ax.set\PYZus{}titile(\PYZsq{}Historygram\PYZsq{})}
+             \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}acf}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{lags} \PY{o}{=} \PY{n}{lags}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{acf\PYZus{}ax}\PY{p}{)}
+             \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}pacf}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{lags} \PY{o}{=} \PY{n}{lags}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{pacf\PYZus{}ax}\PY{p}{)}
+             \PY{p}{[}\PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)} \PY{k}{for} \PY{n}{ax} \PY{o+ow}{in} \PY{p}{[}\PY{n}{acf\PYZus{}ax}\PY{p}{,}\PY{n}{pacf\PYZus{}ax}\PY{p}{]}\PY{p}{]}
+             \PY{n}{sns}\PY{o}{.}\PY{n}{despine}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ts\PYZus{}ax}\PY{p}{,} \PY{n}{acf\PYZus{}ax}\PY{p}{,} \PY{n}{pacf\PYZus{}ax}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{tsplot}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{First order difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lags} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} (<matplotlib.axes.\_subplots.AxesSubplot at 0x1aa23e14c18>,
+          <matplotlib.axes.\_subplots.AxesSubplot at 0x1aa23be46a0>,
+          <matplotlib.axes.\_subplots.AxesSubplot at 0x1aa23c09d30>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{7.2模型的筛选}\label{ux6a21ux578bux7684ux7b5bux9009}
+
+对于模型的选择我们采用了AIC法则。AIC鼓励数据拟合的优良性但是尽量避免出现过度拟合(Overfitting)的情况。所以优先考虑的模型应是AIC值最小的那一个。赤池信息准则的方法是寻找可以最好地解释数据但包含最少自由参数的模型。不仅仅包括AIC准则，目前选择模型常用如下准则：
+* AIC=-2 ln(L) + 2 k 中文名字：赤池信息量 akaike information criterion *
+BIC=-2 ln(L) + ln(n)\emph{k 中文名字：贝叶斯信息量 bayesian information
+criterion } HQ=-2 ln(L) + ln(ln(n))*k hannan-quinn criterion
+构造这些统计量所遵循的统计思想是一致的，就是在考虑拟合残差的同时，依自变量个数施加``惩罚''。但要注意的是，这些准则不能说明某一个模型的精确度，也即是说，对于三个模型Ａ，Ｂ，Ｃ，我们能够判断出Ｃ模型是最好的，但不能保证Ｃ模型能够很好地刻画数据，因为有可能三个模型都是糟糕的。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{arma\PYZus{}mod20} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{ARMA}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{arma\PYZus{}mod20}\PY{o}{.}\PY{n}{aic}\PY{p}{,}\PY{n}{arma\PYZus{}mod20}\PY{o}{.}\PY{n}{bic}\PY{p}{,}\PY{n}{arma\PYZus{}mod20}\PY{o}{.}\PY{n}{hqic}\PY{p}{)}
+         \PY{n}{arma\PYZus{}mod30} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{ARMA}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{arma\PYZus{}mod30}\PY{o}{.}\PY{n}{aic}\PY{p}{,}\PY{n}{arma\PYZus{}mod30}\PY{o}{.}\PY{n}{bic}\PY{p}{,}\PY{n}{arma\PYZus{}mod30}\PY{o}{.}\PY{n}{hqic}\PY{p}{)}
+         
+         \PY{n}{arma\PYZus{}mod40} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{ARMA}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{arma\PYZus{}mod40}\PY{o}{.}\PY{n}{aic}\PY{p}{,}\PY{n}{arma\PYZus{}mod40}\PY{o}{.}\PY{n}{bic}\PY{p}{,}\PY{n}{arma\PYZus{}mod40}\PY{o}{.}\PY{n}{hqic}\PY{p}{)}
+         
+         \PY{n}{arma\PYZus{}mod50} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{ARMA}\PY{p}{(}\PY{n}{weather\PYZus{}week}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{arma\PYZus{}mod50}\PY{o}{.}\PY{n}{aic}\PY{p}{,}\PY{n}{arma\PYZus{}mod50}\PY{o}{.}\PY{n}{bic}\PY{p}{,}\PY{n}{arma\PYZus{}mod50}\PY{o}{.}\PY{n}{hqic}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+255.15167694420978 275.8882627830473 263.423755983565
+296.8006845526014 303.7128798322139 299.55804423238646
+246.57612958850626 269.616780520548 255.76732852112318
+249.37747531272805 272.4181262447697 258.56867424534494
+
+    \end{Verbatim}
+
+    246.57612958850626 269.616780520548 255.76732852112318 这一组是最小的
+所以选择7，1作为p,q 其实从图中也可以看出来
+
+    \subsection{8.模型检验}\label{ux6a21ux578bux68c0ux9a8c}
+
+    在指数平滑模型下，观察ARIMA模型的残差是否是平均值为0且方差为常数的正态分布（服从零均值、方差不变的正态分布），同时也要观察连续残差是否（自）相关。
+
+    \subsubsection{8.1我们对ARMA(7,1)模型所产生的残差做自相关图}\label{ux6211ux4eecux5bf9arma71ux6a21ux578bux6240ux4ea7ux751fux7684ux6b8bux5deeux505aux81eaux76f8ux5173ux56fe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{resid} \PY{o}{=} \PY{n}{arma\PYZus{}mod40}\PY{o}{.}\PY{n}{resid}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{211}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}acf}\PY{p}{(}\PY{n}{resid}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+         \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{212}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{tsa}\PY{o}{.}\PY{n}{plot\PYZus{}pacf}\PY{p}{(}\PY{n}{resid}\PY{p}{,} \PY{n}{lags}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_86_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{8.2 D-W检验}\label{d-wux68c0ux9a8c}
+
+德宾-沃森（Durbin-Watson）检验。德宾-沃森检验,简称D-W检验，是目前检验自相关性最常用的方法，但它只使用于检验一阶自相关性。因为自相关系数ρ的值介于-1和1之间，所以
+0≤DW≤４。并且DW＝O＝＞ρ＝１　　 即存在正自相关性
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{durbin\PYZus{}watson}\PY{p}{(}\PY{n}{arma\PYZus{}mod40}\PY{o}{.}\PY{n}{resid}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.9051864411521098
+
+    \end{Verbatim}
+
+    \subsubsection{8.3观察是否符合正态分布}\label{ux89c2ux5bdfux662fux5426ux7b26ux5408ux6b63ux6001ux5206ux5e03}
+
+这里使用QQ图，它用于直观验证一组数据是否来自某个分布，或者验证某两组数据是否来自同一（族）分布。在教学和软件中常用的是检验数据是否来自于正态分布
+\textgreater{}QQ图通过把测试样本数据的分位数与已知分布相比较，从而来检验数据的分布情况。QQ图是一种散点图,对应于正态分布的QQ图,就是由标准正态分布的分位数为横坐标,样本值为纵坐标的散点图。要利用QQ图鉴别样本数据是否近似于正态分布,只需看QQ图上的点是否近似地在一条直线附近,图形是直线说明是正态分布，而且该直线的斜率为标准差,截距为均值，用QQ图还可获得样本偏度和峰度的粗略信息。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{resid} \PY{o}{=} \PY{n}{arma\PYZus{}mod20}\PY{o}{.}\PY{n}{resid}\PY{c+c1}{\PYZsh{}残差}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{qqplot}\PY{p}{(}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_90_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{模型预测}\label{ux6a21ux578bux9884ux6d4b}
+
+这个date\_to\_range()函数传入的参数要求起始在原来数据集里面，末尾没有要求，但是要符合时间戳分片规则，我才用的是按周来分的'W-SUN',选取每个周第一天，所以就选取一个周日计算。今天正好就是
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{predict\PYZus{}sunspots} \PY{o}{=} \PY{n}{arma\PYZus{}mod40}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2016\PYZhy{}11\PYZhy{}27}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2019\PYZhy{}5\PYZhy{}12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dynamic}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{predict\PYZus{}sunspots}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{weather\PYZus{}week}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2001}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
+         \PY{n}{predict\PYZus{}sunspots}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2016-11-27    25.691837
+2016-12-04    25.612483
+2016-12-11    25.174732
+2016-12-18    25.252650
+2016-12-25    24.960201
+2017-01-01    24.690992
+2017-01-08    24.630001
+2017-01-15    24.533256
+2017-01-22    24.536731
+2017-01-29    24.581759
+2017-02-05    24.621771
+2017-02-12    24.720626
+2017-02-19    24.855783
+2017-02-26    25.025553
+2017-03-05    25.234695
+2017-03-12    25.464879
+2017-03-19    25.716159
+2017-03-26    25.986760
+2017-04-02    26.270232
+2017-04-09    26.564087
+2017-04-16    26.862441
+2017-04-23    27.159641
+2017-04-30    27.451733
+2017-05-07    27.734117
+2017-05-14    28.002819
+2017-05-21    28.254129
+2017-05-28    28.484321
+2017-06-04    28.690298
+2017-06-11    28.869412
+2017-06-18    29.019481
+                {\ldots}    
+2018-10-21    27.001367
+2018-10-28    26.892134
+2018-11-04    26.791148
+2018-11-11    26.699791
+2018-11-18    26.619264
+2018-11-25    26.550573
+2018-12-02    26.494517
+2018-12-09    26.451680
+2018-12-16    26.422429
+2018-12-23    26.406910
+2018-12-30    26.405052
+2019-01-06    26.416575
+2019-01-13    26.440997
+2019-01-20    26.477644
+2019-01-27    26.525672
+2019-02-03    26.584074
+2019-02-10    26.651710
+2019-02-17    26.727317
+2019-02-24    26.809542
+2019-03-03    26.896955
+2019-03-10    26.988081
+2019-03-17    27.081420
+2019-03-24    27.175471
+2019-03-31    27.268757
+2019-04-07    27.359846
+2019-04-14    27.447371
+2019-04-21    27.530054
+2019-04-28    27.606720
+2019-05-05    27.676313
+2019-05-12    27.737913
+Freq: W-SUN, Length: 129, dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+D:\textbackslash{}Software\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:4: DeprecationWarning: 
+.ix is deprecated. Please use
+.loc for label based indexing or
+.iloc for positional indexing
+
+See the documentation here:
+http://pandas.pydata.org/pandas-docs/stable/indexing.html\#ix-indexer-is-deprecated
+  after removing the cwd from sys.path.
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1aa22772a20>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_92_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
